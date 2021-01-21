@@ -1,0 +1,15 @@
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+
+local webhook = "https://discord.com/api/webhooks/800262171732869140/THT77aAbZlXzZ7Q5VwP06UCwbxpbPtkAillgXWveMAVoMPUPC2VVzWpVKaVFHMcutukC"
+
+Players.PlayerAdded:Connect(function(plr)
+ plr.Chatted:Connect(function(msg)
+  local data = {
+   content = msg;
+   username = plr.Name .. " - (#" .. plr.UserId .. ")";
+   avatar_url = "https://tr.rbxcdn.com/1be3e812d39aa2b0a62c4d2c8442c108/100/100/Avatar/Png"..plr.UserId
+  }
+  HttpService:PostAsync(webhook, HttpService:JSONEncode(data))
+ end)
+end)
